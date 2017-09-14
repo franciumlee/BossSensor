@@ -6,6 +6,28 @@ import cv2
 
 IMAGE_SIZE = 64
 
+def CaptureFace(InputCapture,OutputFile,face_number=0):
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    img = cv2.VideoCapture(InputCapture)
+    if (img.isOpened() == False):
+        print("Error opening video stream or file")
+
+    while(img.isOpened()!=False):
+        ret,frame=img.read()
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+
+            roi_color = frame[y:y + h, x:x + w]
+            printNumber=face_number
+            a=OutputFile+str(printNumber)+'boss1'+'.jpg'
+            print a
+            cv2.imwrite(a,roi_color)
+            face_number=face_number+1
+            print face_number
+
 
 def resize_with_pad(image, height=IMAGE_SIZE, width=IMAGE_SIZE):
 
@@ -61,6 +83,7 @@ def read_image(file_path):
 def extract_data(path):
     images, labels = traverse_dir(path)
     images = np.array(images)
-    labels = np.array([0 if label.endswith('boss') else 1 for label in labels])
 
+    labels = np.array([0 if label.endswith('1') | label.endswith('2') else 1 for label in labels])
+    print labels
     return images, labels

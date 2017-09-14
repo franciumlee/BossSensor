@@ -71,7 +71,7 @@ class Dataset(object):
 
 class Model(object):
 
-    FILE_PATH = './store/model.h5'
+    FILE_PATH = 'store/model.h5'
 
     def __init__(self):
         self.model = None
@@ -84,19 +84,19 @@ class Model(object):
         self.model.add(Convolution2D(32, 3, 3))
         self.model.add(Activation('relu'))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
-        self.model.add(Dropout(0.25))
+        self.model.add(Dropout(1))
 
         self.model.add(Convolution2D(64, 3, 3, border_mode='same'))
         self.model.add(Activation('relu'))
         self.model.add(Convolution2D(64, 3, 3))
         self.model.add(Activation('relu'))
         self.model.add(MaxPooling2D(pool_size=(2, 2)))
-        self.model.add(Dropout(0.25))
+        self.model.add(Dropout(1))
 
         self.model.add(Flatten())
         self.model.add(Dense(512))
         self.model.add(Activation('relu'))
-        self.model.add(Dropout(0.5))
+        self.model.add(Dropout(1))
         self.model.add(Dense(nb_classes))
         self.model.add(Activation('softmax'))
 
