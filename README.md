@@ -1,4 +1,4 @@
-# BossSensor
-Hide screen when boss is approaching.
+# BossSensor(Fork from Hironsan/BossSensor)
+
 
 I had change some code when I am using it. FranciumLee
